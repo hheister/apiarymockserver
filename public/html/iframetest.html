@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+This page has an ifrmae
+<iframe id="iframe1"
+        width="500" height="500" src="http://localhost:8080/simpleserver"></iframe>
+
+<iframe id="iframe2" width="900" height="900" src="http://slc01hhz.us.oracle.com:7201/apiplatform/apis/api/3"></iframe>
+<script>
+    window.iframetest = function() {
+        // This method can only be seen by iframe1 because it is in the smae domain
+        // iframe2 will not be able to see this function
+        console.log('iframetest called!');
+    }
+
+</script>
+</body>
+</html>

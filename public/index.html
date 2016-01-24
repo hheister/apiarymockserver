@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Apiary Mock Server</title>
+	<link rel="stylesheet" href="css/horst.css" type="text/css"/>
+</head>
+<body bgcolor="#98fb98">
+<div class="title">Apiary Mock Server</div>
+<br>
+<div style="font-family: Verdana, Arial, sans-serif;">
+	<span>Server URL:</span>
+	<span data-bind="text:labelText"></span>
+</div>
+<br>
+<div>
+	<input id="file-input" type="file" multiple>
+	<p>
+		<button data-bind="click:sendData">Send Data To Parent Window</button>
+	</p>
+
+	<p>
+		<button data-bind="click:doParentCall">Do Javascript Parent Call</button>
+	</p>
+
+	<p>
+		<button data-bind="click:postMessageToAPIManager">Post Message To API Manager Window</button>
+	</p>
+</div>
+<script data-main="js/main" src="/js/vendors/require.js"></script>
+</body>
+</html>

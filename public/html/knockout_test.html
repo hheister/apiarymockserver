@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Stand Alone Knockout Page</title>
+	</head>
+    <body bgcolor="cyan">
+    <h1>Stand Alone Knockout Page</h1>
+        <label data-bind="text:labelText"></label>
+
+        <script type="text/javascript" src="http://localhost:8080/js/vendors/jquery.min.js"></script>
+        <script type='text/javascript' src='http://localhost:8080/js/vendors/knockout.debug.js'></script>
+        <script>
+            function ViewModel() {
+                var self = this;
+                self.labelText = ko.observable('This text coming from view model');
+
+            };
+
+            var viewModel = new ViewModel();
+            ko.applyBindings(viewModel);
+        </script>
+    </body>
+</html>
