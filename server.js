@@ -126,5 +126,5 @@ function send_failure(res, code, err) {
 });*/
 
 var server = app.listen(app.get('port'), function() {
-    console.log('Server up: http://localhost:' + app.get('port'));
+    console.log('Apiary Mock Server up: http://localhost:' + app.get('port'));
 });

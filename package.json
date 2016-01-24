@@ -1,6 +1,6 @@
 {
-  "name": "SimpleServer",
-  "description": "Horst Development Server For NodeJS",
+  "name": "ApiaryMockServer",
+  "description": "Horst's Apiary Mock Server Based on NodeJS",
   "version": "0.0.2",
   "private": true,
   "dependencies": {
