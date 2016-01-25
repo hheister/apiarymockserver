@@ -49,6 +49,11 @@ function ($, ko, koTemplateEngine, koBindings) {
                 company: "oracle",
                 type: "raml"
             };
+
+            var message = $("#message-input")[0].value;
+            if (message) {
+                data = message;
+            }
             parent.postMessage(data, origin);
         };
 
