@@ -53,23 +53,11 @@ function ($, ko, koTemplateEngine, koBindings) {
         }
 
         var postMessageToAPIManager = function() {
-            var parent = window.parent;
-            var queryString = window.location.search;
-            queryString = queryString.substring(1);
-            var params = parseQueryString(queryString);
-            var origin = params['origin'];
-
             var data = {
-                name: "horst",
-                company: "oracle",
-                type: "raml"
+                type: "text",
+                data: $("#message-input")[0].value
             };
-
-            var message = $("#message-input")[0].value;
-            if (message) {
-                data = message;
-            }
-            parent.postMessage(data, origin);
+            sendDataToAPIManager(data);
         };
 
         var parseQueryString = function( queryString ) {
@@ -107,7 +95,11 @@ function ($, ko, koTemplateEngine, koBindings) {
         });
 
         var sendMarkDownToAPIManager = function() {
-            sendDataToAPIManager(markdown());
+            var data = {
+                type: 'markdown',
+                data: markdown()
+            };
+            sendDataToAPIManager(data);
         };
 
         var downloadPDF = function() {
@@ -118,7 +110,7 @@ function ($, ko, koTemplateEngine, koBindings) {
                     var blob = new Blob([data]);
 
                     var href = window.URL.createObjectURL(blob);
-                    var linkHTML = '<a href=' + href + '>Downloaded PDF</a>';
+                    var linkHTML = "<a target='_blank' href='" + href +  "'>Downloaded PDF</a>";
                     $('#pdf-link-container').append(linkHTML);
                 },
                 error: function (jhr, exception) {
@@ -145,7 +137,11 @@ function ($, ko, koTemplateEngine, koBindings) {
         });
 
         var sendPDFtoAPIManager = function() {
-            sendDataToAPIManager(pdf());
+            var data = {
+                type: 'pdf',
+                data: pdf()
+            };
+            sendDataToAPIManager(data);
         };
 
         return {
