@@ -10,6 +10,7 @@ function ($, ko, koTemplateEngine, koBindings) {
         var API_MANAGER_ORIGIN = "http://slc01hhz.us.oracle.com:7201";
         var markdown = ko.observable();
         var pdf = ko.observable();
+        var downloadingPDF = ko.observable(false);
 
         var activate = function () {
             ko.applyBindings(vm);
@@ -121,10 +122,11 @@ function ($, ko, koTemplateEngine, koBindings) {
             var oReq = new XMLHttpRequest();
             oReq.open("GET", "./pdf/test.pdf", true);
             oReq.responseType = "blob";
-
+            downloadingPDF(true);
             oReq.onload = function(oEvent) {
                 var blob = oReq.response;
                 pdf(blob);
+                downloadingPDF(false);
                 var href = window.URL.createObjectURL(blob);
                 var linkHTML = "<a target='_blank' href='" + href +  "'>Downloaded PDF</a>";
                 $('#pdf-link-container').append(linkHTML);
@@ -175,6 +177,7 @@ function ($, ko, koTemplateEngine, koBindings) {
         };
 
         return {
+            downloadingPDF: downloadingPDF,
             sendPDFtoAPIManager: sendPDFtoAPIManager,
             hasPDF: hasPDF,
             downloadPDF: downloadPDF,

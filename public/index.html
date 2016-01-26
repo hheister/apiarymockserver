@@ -34,7 +34,9 @@
 
 		<button data-bind="click:sendPDFtoAPIManager, enable: hasPDF">Send To API Manager</button>
 
-		<div id="pdf-link-container"></div>
+		<div id="pdf-link-container">
+			<label data-bind="visible:downloadingPDF">Please Wait Downloading PDF...</label>
+		</div>
 	</p>
 
 	<p>
