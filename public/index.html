@@ -24,6 +24,20 @@
 	</p>
 
 	<p>
+		<button data-bind="click:downloadMarkdown">Download Markdown</button>
+
+		<button data-bind="click:sendMarkDownToAPIManager, enable: hasMarkdown">Send To API Manager</button>
+	</p>
+
+	<p>
+		<button data-bind="click:downloadPDF">Download PDF</button>
+
+		<button data-bind="click:sendPDFtoAPIManager, enable: hasPDF">Send To API Manager</button>
+
+		<div id="pdf-link-container"></div>
+	</p>
+
+	<p>
 		<label>Enter Message to Send:</label>
 		<input id="message-input" type="text" name="msg" value="Your message"/><br>
 		<button data-bind="click:postMessageToAPIManager">Post Message To API Manager Window</button>

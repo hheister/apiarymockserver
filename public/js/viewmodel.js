@@ -8,6 +8,8 @@ function ($, ko, koTemplateEngine, koBindings) {
         var serverUrl = window.location.href;
         var labelText = ko.observable(serverUrl);
         var API_MANAGER_ORIGIN = "http://slc01hhz.us.oracle.com:7201";
+        var markdown = ko.observable();
+        var pdf = ko.observable();
 
         var activate = function () {
             ko.applyBindings(vm);
@@ -36,6 +38,19 @@ function ($, ko, koTemplateEngine, koBindings) {
                 console.log('iframetest is NOT seen in the parent window!');
             }
         };
+
+        function sendDataToAPIManager(data) {
+            var parent = window.parent;
+            var queryString = window.location.search;
+            queryString = queryString.substring(1);
+            var params = parseQueryString(queryString);
+            var origin = params['origin'];
+            if (origin) {
+                parent.postMessage(data, origin);
+            } else {
+                alert('No origin to send message to!');
+            }
+        }
 
         var postMessageToAPIManager = function() {
             var parent = window.parent;
@@ -72,7 +87,74 @@ function ($, ko, koTemplateEngine, koBindings) {
             return params;
         };
 
+        var downloadMarkdown = function() {
+            $.ajax({
+                url: "./markdown/README.md",
+                type: "GET",
+                dataType:'text',
+                success: function (result) {
+                    console.log(result);
+                    markdown(result);
+                },
+                error: function(jhr, exception) {
+                    console.log(exception);
+                }
+            });
+        };
+
+        var hasMarkdown = ko.computed(function () {
+            return markdown() !== undefined && markdown() != null;
+        });
+
+        var sendMarkDownToAPIManager = function() {
+            sendDataToAPIManager(markdown());
+        };
+
+        var downloadPDF = function() {
+            $.ajax({
+                url: './pdf/test.pdf',
+                success: function (data) {
+                    pdf(data);
+                    var blob = new Blob([data]);
+
+                    var href = window.URL.createObjectURL(blob);
+                    var linkHTML = '<a href=' + href + '>Downloaded PDF</a>';
+                    $('#pdf-link-container').append(linkHTML);
+                },
+                error: function (jhr, exception) {
+                    console.log(exception);
+                }
+            });
+            /*
+            $.ajax({
+                url: "./images/cloudworld.jpg",
+                type: "GET",
+                processData: false,
+                success: function (result) {
+                    console.log(result);
+                    image(result);
+                },
+                error: function(jhr, exception) {
+                    console.log(exception);
+                }
+            });*/
+        };
+
+        var hasPDF = ko.computed(function () {
+            return pdf() !== undefined && pdf() != null;
+        });
+
+        var sendPDFtoAPIManager = function() {
+            sendDataToAPIManager(pdf());
+        };
+
         return {
+            sendPDFtoAPIManager: sendPDFtoAPIManager,
+            hasPDF: hasPDF,
+            downloadPDF: downloadPDF,
+            sendMarkDownToAPIManager: sendMarkDownToAPIManager,
+            hasMarkdown: hasMarkdown,
+            downloadMarkdown: downloadMarkdown,
             labelText: labelText,
             activate: activate,
             sendData: sendData,
