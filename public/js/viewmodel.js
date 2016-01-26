@@ -102,7 +102,36 @@ function ($, ko, koTemplateEngine, koBindings) {
             sendDataToAPIManager(data);
         };
 
+        var downloadImage = function() {
+            var oReq = new XMLHttpRequest();
+            oReq.open("GET", "/images/cloudworld.jpg", true);
+            oReq.responseType = "blob";
+
+            oReq.onload = function(oEvent) {
+                var blob = oReq.response;
+                // ...
+            };
+
+            oReq.send();
+        };
+
         var downloadPDF = function() {
+            //downloadImage();
+
+            var oReq = new XMLHttpRequest();
+            oReq.open("GET", "./pdf/test.pdf", true);
+            oReq.responseType = "blob";
+
+            oReq.onload = function(oEvent) {
+                var blob = oReq.response;
+                var href = window.URL.createObjectURL(blob);
+                var linkHTML = "<a target='_blank' href='" + href +  "'>Downloaded PDF</a>";
+                $('#pdf-link-container').append(linkHTML);
+            };
+
+            oReq.send();
+
+            /*
             $.ajax({
                 url: './pdf/test.pdf',
                 success: function (data) {
@@ -116,7 +145,7 @@ function ($, ko, koTemplateEngine, koBindings) {
                 error: function (jhr, exception) {
                     console.log(exception);
                 }
-            });
+            });*/
             /*
             $.ajax({
                 url: "./images/cloudworld.jpg",
