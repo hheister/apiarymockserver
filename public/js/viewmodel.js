@@ -124,6 +124,7 @@ function ($, ko, koTemplateEngine, koBindings) {
 
             oReq.onload = function(oEvent) {
                 var blob = oReq.response;
+                pdf(blob);
                 var href = window.URL.createObjectURL(blob);
                 var linkHTML = "<a target='_blank' href='" + href +  "'>Downloaded PDF</a>";
                 $('#pdf-link-container').append(linkHTML);
