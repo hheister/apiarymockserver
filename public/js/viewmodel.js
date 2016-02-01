@@ -1,5 +1,5 @@
-define(['jquery', 'knockout', 'koTemplateEngine', 'koBindings', 'utils'],
-function ($, ko, koTemplateEngine, koBindings) {
+define(['jquery', 'knockout', 'koTemplateEngine', 'utils'],
+function ($, ko, koTemplateEngine) {
 
     var vm = (function () {
         "use strict";

@@ -16,7 +16,6 @@ require.config({
         "knockout": "vendors/knockout.debug",
         "koTemplateEngine":"vendors/koExternalTemplateEngine_all.min",
         "viewmodel": "viewmodel",
-        "koBindings": "koBindings",
         "utils": "utils"
     },
 
