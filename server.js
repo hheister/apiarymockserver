@@ -2,7 +2,11 @@ var path = require("path");
 var express = require('express');
 var async = require('async');
 var fs = require('fs');
+var helmet = require('helmet');
 var app = express();
+
+// Implement X-Frame: Deny
+//app.use(helmet.frameguard('deny'));
 
 //app.use(express.basicAuth("horst", "heidi"));
 console.log('process.env.PORT:' + process.env.PORT);
