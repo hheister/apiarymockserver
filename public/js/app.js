@@ -1,3 +1,5 @@
+//Michelle added
+
 define(['viewmodel', 'jqueryUI'],
     function(vm, jqueryUI) {
 
